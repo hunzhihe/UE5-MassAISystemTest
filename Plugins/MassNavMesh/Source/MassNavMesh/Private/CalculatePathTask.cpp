@@ -38,7 +38,8 @@ EStateTreeRunStatus FCalculatePathTask::EnterState(FStateTreeExecutionContext& C
 	auto Entity = MassContext.GetEntity();
 
 	FPathFindingQuery PathQuery{ Context.GetWorld(), *NavData, TransformFragment.GetTransform().GetLocation(), InstanceData.DesiredLocation };
-	InstanceData.QueryID = NavSystem->FindPathAsync(NavProperties, PathQuery, FNavPathQueryDelegate::CreateLambda([&InstanceData, &SignalSubsystem, Entity, &MassContext](uint32 QueryID, ENavigationQueryResult::Type Result, FNavPathSharedPtr NavPath)
+	InstanceData.QueryID = NavSystem->FindPathAsync(NavProperties, PathQuery, 
+		FNavPathQueryDelegate::CreateLambda([&InstanceData, &SignalSubsystem, Entity, &MassContext](uint32 QueryID, ENavigationQueryResult::Type Result, FNavPathSharedPtr NavPath)
 		{
 			switch (Result)
 			{
